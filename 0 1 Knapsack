@@ -1,0 +1,28 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    vector<int>profit{60,100,120};
+    vector<int>weight{10,20,30};
+    int capacity=50;
+    int dp[profit.size()+1][capacity+1];
+    for(int i=0;i<=profit.size();i++)
+    {
+        for(int j=0;j<=capacity;j++)
+        {
+            if(i==0||j==0)dp[i][j]=0;
+            else
+            {
+                if(weight[i-1]<=capacity)
+                dp[i][j]=max(profit[i-1]+dp[i-1][j-weight[i-1]],dp[i-1][j]);
+                else
+                    dp[i][j]=dp[i-1][j];
+            }
+        }
+    }
+    cout<<dp[profit.size()][capacity];
+    return 0;
+}
