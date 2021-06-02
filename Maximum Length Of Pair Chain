@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int dp[1001][1001];
+    bool is_valid(int a,int b)
+    {
+        if(a<b)return true;
+        return false;
+    }
+    int helper(vector<vector<int>>& pairs,int prev,int curr)
+    {
+        if(curr>=pairs.size())
+            return 0;
+        if(dp[prev+1][curr]!=-1)return dp[prev+1][curr];
+        int ans=0;
+        
+        if(prev<0 || is_valid(pairs[prev][1],pairs[curr][0]))
+            ans=1+helper(pairs,curr,curr+1);
+        
+        int nottaken=helper(pairs,prev,curr+1);
+        
+         dp[prev+1][curr]= max(ans,nottaken);    
+        return dp[prev+1][curr];
+    }
+    int findLongestChain(vector<vector<int>>& pairs) 
+    {
+        memset(dp,-1,sizeof dp);
+        sort(pairs.begin(),pairs.end());
+        return helper(pairs,-1,0);
+    }
+};
