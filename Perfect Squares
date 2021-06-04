@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int helper(int n)
+    {
+        if(n==0)return 0;
+        
+        int result=INT_MAX;
+        for(int i=1;i*i<=n;i++)
+        {
+            int minsq=helper(n-i*i);
+            result=min(result,minsq);
+        }
+        result+=1;
+        return result;
+    }
+    int numSquares(int n) 
+    {
+        return helper(n);
+    }
+};
