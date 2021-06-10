@@ -30,3 +30,34 @@ public:
         return helper(nums,0,0);    
     }
 };
+
+
+Trerative Soln
+-----------------------
+
+
+class Solution {
+public:
+
+    int helper(vector<int>&nums,int start,int stop)
+    {
+        int a=nums[start];
+        int b=max(nums[start],nums[start+1]);
+        int c=0;
+        for(int i=start+2;i<=stop;i++)
+        {
+            c=max(a+nums[i],b);
+            a=b;
+            b=c;
+        }
+        return c;
+    }
+    int rob(vector<int>& nums) 
+    {
+        int n=nums.size();
+        if(n<=3)
+            return *max_element(nums.begin(),nums.end());
+        
+        return max(helper(nums,0,n-2),helper(nums,1,n-1));
+    }
+};
