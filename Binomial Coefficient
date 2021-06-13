@@ -1,0 +1,31 @@
+#include <iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+
+int main()
+{
+    /*nCr=!n
+          ---------
+          ((n-r)!r!)
+    */
+    int n=4;
+    int r=2;
+
+    if(n<r)return 0;
+    if(n-r<r)r=n-r;
+
+    int dp[r+1];
+    for(int i=0;i<=r;i++)dp[i]=0;
+    dp[0]=1;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=min(i,r);j>0;j--)
+        {
+            dp[j]=dp[j]+dp[j-1];
+        }
+    }
+    cout<<dp[r];
+
+}
