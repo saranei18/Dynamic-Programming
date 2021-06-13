@@ -1,0 +1,60 @@
+REC + MEM:
+-----------------------
+
+#include <iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int counts=0;
+int dp[100][100]={0};
+int helper(vector<int>&coins,int m,int n)
+{
+    if(n==0)return 1;
+    if(dp[m][n]!=0)return dp[m][n];
+    if(n<0)return 0;
+    if(m<=0 && n>=1 )return 0;
+
+    return dp[m][n]= helper(coins,m,n-coins[m-1])+helper(coins,m-1,n);
+}
+int main()
+{
+    int n=4;
+
+    vector<int>coins{1,2,3};
+    cout<<helper(coins,3,4);
+    return 0;
+}
+
+
+
+Iterative Soln
+------------------
+
+#include <iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    int amt=9;
+    vector<int>coins{1,2,3};
+    int n=coins.size();
+    int dp[n+1][amt+1];
+    for(int i=0;i<=n;i++)
+    {
+        for(int j=0;j<=amt;j++)
+        {
+            if(j==0)
+                dp[i][j]=0;
+            else if(i==0)
+                dp[i][j]=1e5;
+            else if(coins[i-1]>j)
+                dp[i][j]=dp[i-1][j];
+            else
+                dp[i][j]=min(1+dp[i][j-coins[i-1]],dp[i-1][j]);
+        }
+    }
+    cout<<dp[n][amt];
+    return 0;
+}
