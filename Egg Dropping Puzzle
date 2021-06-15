@@ -1,0 +1,25 @@
+class Solution {
+public:
+    
+    
+    int helper(int eggs,int floor)
+    {
+         
+        if(eggs==1)return floor;
+        if(floor==1)return 1;
+        if(floor==0)return 0;
+        //if(dp[eggs][floor]!=-1)return dp[eggs][floor];
+        int ans=INT_MAX;
+        for(int i=1;i<=floor;i++)
+        {
+            ans=min(ans,1+max(helper(eggs-1,i-1),helper(eggs,floor-i)));
+        }
+            
+        return  ans;
+    }
+    int superEggDrop(int k, int n) 
+    {
+        //memset(dp,-1,sizeof dp);
+        return helper(k,n);
+    }
+};
