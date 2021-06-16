@@ -26,3 +26,41 @@ int main()
     return 0;
 
 }
+
+
+
+O(n):
+-----------------
+
+
+#include<iostream>
+#include<algorithm>
+#include<string>
+#include<vector>
+#include<climits>
+using namespace std;
+int main()
+{
+    vector<int>nums{1 ,4 ,3 ,2 ,6 ,7};
+    int maxind=nums[0];
+    int step=nums[0];
+    int jump=1;
+    for(int i=1;i<nums.size();i++)
+    {
+        if(i==nums.size()-1)
+        {
+            cout<<jump;
+            return 0;
+        }
+        maxind=max(maxind,nums[i]+i);
+        step--;
+        if(step==0)
+        {
+            jump++;
+            if(i>=maxind)return -1;
+            step=maxind-i;
+        }
+    }
+
+    return 0;
+}
