@@ -1,0 +1,20 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+using namespace std;
+
+int main()
+{
+    vector<int>nums{3, -4, 2, -3, -1, 7, -5};
+    int meh=INT_MAX;
+    int msf=INT_MAX;
+
+    for(int i=0;i<nums.size();i++)
+    {
+        if(meh>0)meh=nums[i];
+        else meh+=nums[i];
+        msf=min(msf,meh);
+    }
+    cout<<msf;
+}
