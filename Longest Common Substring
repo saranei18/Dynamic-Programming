@@ -1,0 +1,22 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+using namespace std;
+
+int helper(string s1,string s2,int i,int j,int counts)
+{
+    if(i==0 || j==0)return counts;
+
+    if(s1[i-1]==s2[j-1])return helper(s1,s2,i-1,j-1,counts+1);
+
+    return max(helper(s1,s2,i-1,j,0),helper(s1,s2,i,j-1,0));
+
+}
+int main()
+{
+    string s1="abcdxyz";
+    string s2="xyzfghi";
+    cout<<helper(s1,s2,s1.length(),s2.length(),0);
+    return 0;
+}
