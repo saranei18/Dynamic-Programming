@@ -1,0 +1,25 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+int helper(vector<int>&nums,int idx,int sum,int w)
+{
+    if(w == 0)
+        return sum;
+
+    if(w<0)return INT_MAX;
+    if(idx>=nums.size())return INT_MAX;
+    int res=min(helper(nums,idx,sum+nums[idx],w-(idx+1)),helper(nums,idx+1,sum,w));
+
+    return res;
+}
+int main()
+{
+    int w=5;
+    vector<int>nums{20, 10, 4, 50, 100};
+
+    cout<<helper(nums,0,0,w);
+    return 0;
+}
