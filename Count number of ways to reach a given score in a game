@@ -1,0 +1,22 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+using namespace std;
+
+int helper(vector<int>&nums,int n,int idx)
+{
+    if(n<0)return 0;
+    if(idx>=nums.size())return 0;
+    if(n==0)return 1;
+    int ans=0;
+    return ans = helper(nums,n-nums[idx],idx)+helper(nums,n,idx+1);
+
+}
+int main()
+{
+    int n=13;
+    vector<int>nums{3,5,10};
+    cout<<helper(nums,n,0);
+    return 0;
+}
