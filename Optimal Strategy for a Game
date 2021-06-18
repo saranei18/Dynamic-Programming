@@ -1,0 +1,19 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int helper(vector<int>&nums,int i,int j)
+{
+    if(i>j)return 0;
+    if(i==j)return nums[i];
+
+    return max(nums[i]+min(helper(nums,i+2,j),helper(nums,i+1,j-1)),nums[j]+min(helper(nums,i,j-2),helper(nums,i+1,j-1)));
+}
+
+int main()
+{
+    vector<int>nums{ 8, 15, 3, 7 };
+    cout<<helper(nums,0,nums.size()-1);
+}
