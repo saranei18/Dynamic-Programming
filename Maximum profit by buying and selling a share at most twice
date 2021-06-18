@@ -1,0 +1,23 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int helper(vector<int>&nums,int idx,int k,int f)
+{
+    if(idx>=nums.size())return 0;
+    if(k==0)return 0;
+
+    int ans=0;
+    if(f==1)
+        return max(ans,max(nums[idx]+helper(nums,idx+1,k-1,0),helper(nums,idx+1,k,f)));
+    else
+        return max(ans,max(-nums[idx]+helper(nums,idx+1,k,f),helper(nums,idx+1,k,f)));
+}
+
+int main()
+{
+    vector<int>nums{3,3,5,0,0,3,1,4};
+    cout<<helper(nums,0,2,1);
+}
